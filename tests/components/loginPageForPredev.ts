@@ -1,6 +1,6 @@
 // loginPage.ts
-require("dotenv").config();
 import { Page } from "@playwright/test";
+import { url } from "../variable/variable";
 
 export class LoginPage {
   private page: Page;
@@ -11,10 +11,6 @@ export class LoginPage {
   }
 
   async login(email: string, password: string) {
-    const url = process.env.url?.toString();
-    if (!url) {
-      throw new Error("Missing environment variable: url");
-    }
     await this.page.goto(url);
     await this.page.getByPlaceholder("Email, phone, or Skype").fill(email);
     await this.page.getByRole("button", { name: "Next" }).click();

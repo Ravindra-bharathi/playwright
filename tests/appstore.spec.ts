@@ -2,18 +2,12 @@ require("dotenv").config();
 import { test, expect, chromium } from "@playwright/test";
 import { LoginPage } from "./components/loginPageForPredev";
 import { AppStorePage } from "./components/appstorefile";
+import { password, username } from "./variable/variable";
 
 let page;
 let appStorePage;
 
 test.beforeAll(async () => {
-  const username = process.env.Id?.toString();
-  const password = process.env.password?.toString();
-
-  if (!username || !password) {
-    throw new Error("Missing environment variables: Id and Password");
-  }
-
   test.setTimeout(240000);
 
   const browser = await chromium.launch({ headless: false });
