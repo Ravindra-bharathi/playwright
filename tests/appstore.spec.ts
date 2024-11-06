@@ -9,7 +9,6 @@ let appStorePage;
 test.beforeAll(async () => {
   const username = process.env.Id?.toString();
   const password = process.env.password?.toString();
-  console.log(username, password);
 
   if (!username || !password) {
     throw new Error("Missing environment variables: Id and Password");

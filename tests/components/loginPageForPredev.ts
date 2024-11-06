@@ -1,4 +1,5 @@
 // loginPage.ts
+require("dotenv").config();
 import { Page } from "@playwright/test";
 
 export class LoginPage {
@@ -10,7 +11,11 @@ export class LoginPage {
   }
 
   async login(email: string, password: string) {
-    await this.page.goto("https://predev.symphony4cloud.com/login");
+    const url = process.env.url?.toString();
+    if (!url) {
+      throw new Error("Missing environment variable: url");
+    }
+    await this.page.goto(url);
     await this.page.getByPlaceholder("Email, phone, or Skype").fill(email);
     await this.page.getByRole("button", { name: "Next" }).click();
     await this.page.locator("#i0118").fill(password);
@@ -19,7 +24,7 @@ export class LoginPage {
 
     // Wait for the popup and handle it
     const pageWaitPopup = this.page.waitForEvent("popup");
-    await this.page.goto("https://predev.symphony4cloud.com/login");
+    await this.page.goto(url);
     this.pageForLogin = await pageWaitPopup;
 
     await this.pageForLogin.getByLabel("").click();
