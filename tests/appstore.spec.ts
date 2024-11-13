@@ -1,4 +1,3 @@
-require("dotenv").config();
 import { test, expect, chromium } from "@playwright/test";
 import { LoginPage } from "./components/loginPageForPredev";
 import { AppStorePage } from "./components/appstorefile";
