@@ -61,8 +61,8 @@ export class HomePage {
         }
         await this.clickFooters()
     }
-
     async clickFooters() {
+        await this.page.waitForTimeout(1000);
         await this.page.getByRole('link', { name: 'Contact Us' }).click();
         await this.page.waitForTimeout(1000);
         await this.page.goBack()
@@ -99,5 +99,4 @@ export class HomePage {
         await page5.close()
         await this.page.close()
     }
-
 }

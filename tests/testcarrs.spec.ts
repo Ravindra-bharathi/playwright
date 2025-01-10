@@ -8,24 +8,18 @@ test.describe("Carr's Crackers Website Tests", () => {
         const page = await context.newPage();
         const homePage = new HomePage(page);
 
-        try {
-            test.setTimeout(220000);
-            await homePage.navigate();
-            await homePage.acceptCookies();
+        test.setTimeout(400000);
+        await homePage.navigate();
+        await homePage.acceptCookies();
 
-            // Test navigation
-            await homePage.clickProducts();
-            // await homePage.clickEverything();
-            // await homePage.clickWhereToBuy();
-            await homePage.clickCenterProducts();
-            await homePage.clickViewProducts();
-            await homePage.clickFooters();
-            // await homePage.();
+        // Test navigation
+        await homePage.clickProducts();
+        await homePage.clickEverything();
+        await homePage.clickWhereToBuy();
+        await homePage.clickCenterProducts();
+        await homePage.clickViewProducts();
+        await homePage.clickFooters();
+        // await homePage.();
 
-        } catch (error) {
-            console.error("Test failed:", error);
-        } finally {
-            await browser.close();
-        }
     });
 });
