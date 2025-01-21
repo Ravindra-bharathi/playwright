@@ -25,7 +25,7 @@ test.beforeAll(async ({ browserName }) => {
   }
 });
 
-test("test for app store page", async ({}) => {
+test("test for app store page", async ({ }) => {
   if (browserType === "webkit") {
     await page.getByText("Email, phone, or Skype").click();
     await page.getByLabel("Enter your email, phone, or").fill(username);
@@ -70,16 +70,10 @@ test("test for app store page", async ({}) => {
         "(//input[contains(@class,'MuiInputBase-input MuiOutlinedInput-input')])[3]"
       )
       .fill("tesst using playwright");
-    const appLanguageType = pageForLogin.locator(
-      "(//div[contains(@class,'MuiSelect-select MuiSelect-outlined')])[2]"
-    );
-    await appLanguageType.click();
-    await pageForLogin.locator("li[role='option']").nth(1).click();
-    const appGroup = await pageForLogin.locator(
-      "//div[contains(@class,'MuiInputAdornment-root MuiInputAdornment-positionStart')]/following-sibling::div[1]"
-    );
-    await appGroup.click();
-    await pageForLogin.locator("li[role='option']").nth(1).click();
+    await pageForLogin.locator('#appLanguageType').click();
+    await pageForLogin.getByRole('option', { name: 'Playwright' }).click();
+    await pageForLogin.getByLabel('', { exact: true }).click();
+    await pageForLogin.getByRole('option', { name: 'playwright', exact: true }).click();
     await pageForLogin.getByRole("button", { name: "Create" }).click();
     const icon = await pageForLogin.locator("(//img[@class='jss381'])[2]");
 
