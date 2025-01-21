@@ -149,10 +149,10 @@ test.describe("SAP Hana Sales Order Tests", () => {
 
     await page.getByLabel('Details', { exact: true }).click();
 
-    const storageLocation = page.locator('//*[@id="cus.sd.salesorderv2.manage::SalesOrderItemObjectPage--fe::FormContainer::ShippingInfo::FormElement::DataField::StorageLocation::Field-edit-inner-inner"]')
-    await storageLocation.click();
-    await storageLocation.fill('ra');
-    await page.getByText('raw material').click();
+
+    await page.getByLabel('Storage Location').fill('raw material(RMSL)');
+    // await page.locator('[id="__wrapper121-cus\\.sd\\.salesorderv2\\.manage\\:\\:SalesOrderItemObjectPage--fe\\:\\:FormContainer\\:\\:ShippingInfo\\:\\:FieldValueHelp\\:\\:_Item\\:\\:StorageLocation\\:\\:Popover\\:\\:qualifier\\:\\:\\:\\:SuggestTable-0"]').click();
+
 
 
     await page.getByRole("button", { name: "Prices", exact: true }).click();
@@ -165,14 +165,21 @@ test.describe("SAP Hana Sales Order Tests", () => {
     const temp = page.getByText('Z Price');
     await temp.click({ timeout: 60000 });
     await page.locator('[id="fe\\:\\:APD_\\:\\:com\\.sap\\.gateway\\.srvd\\.c_salesordermanage_sd\\.v0001\\.CreatePricingElement-footer"]').getByRole('button', { name: 'Create' }).click();
-    await page.locator('[id="__field40-__clone322-__clone352-inner-inner"]').dblclick();
-    await page.locator('[id="__field40-__clone322-__clone352-inner-inner"]').fill('100,00');
-
+    await page.locator('[id="__field40-__clone328-__clone358-inner-inner"]').click();
+    await page.locator('[id="__field40-__clone328-__clone358-inner-inner"]').fill('100,00');
     await page.getByLabel('Apply').click();
 
 
     await page.getByLabel('Create', { exact: true }).click();
-    await page.waitForTimeout(3000);
+    await page.waitForTimeout(5000);
+    const orderIdLocator = page.locator('[id="__title6-inner"]');
+    const orderId = await orderIdLocator.textContent();
+
+    if (orderId) {
+      console.log(`Sales order ID: ${orderId.trim()}`);
+    } else {
+      console.error("Order ID not found!");
+    }
     await page.screenshot({ path: 'screenshot_sap.png', fullPage: true });
 
 
