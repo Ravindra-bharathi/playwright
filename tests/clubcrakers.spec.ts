@@ -16,19 +16,37 @@ test.describe('Home Page Tests', () => {
     });
 
     test("Navigate to the Home Page and Accept Cookies", async () => {
+        test.setTimeout(800000);
         await homePage.homepageNavigate();
         await homePage.accpectCookies();
     });
 
     test("Navigate to the home page verfication", async () => {
+        test.setTimeout(800000);
         await homePage.homepageVerification();
         await homePage.headerOurfood();
-        // await homePage.headerOurFoodTitle();
+        await homePage.headerOurFoodTitle();
         await homePage.headerRecipies();
         await homePage.headerRecipiesImg();
         await homePage.homepageNavigate();
+        await homePage.homepageContuctUs();
+        await homePage.homepageNavigate();
         await homePage.homepageNextbutton();
         await homePage.homepageCard();
+        await homePage.homepageNavigate();
+        await homePage.homePagevideoCheck();
+        await homePage.homePageImgPerfect();
+        await homePage.homepageNavigate();
+        await homePage.homepageCheckOutRecipes();
+        await homePage.recipesHeadingCheck();
+        await homePage.homepageNavigate();
+        await homePage.homePageInsta();
+        await homePage.homepageNavigate();
+        await homePage.homePageTopbutton();
+        await homePage.searchBar();
+        await homePage.homepageNavigate();
+        await homePage.footerlink();
+
     })
 
     test.afterAll(async () => {
