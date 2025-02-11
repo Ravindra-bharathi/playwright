@@ -1,5 +1,6 @@
 import { test, chromium, Browser, Page, BrowserContext } from "@playwright/test";
 import { HomePage } from "./pages/homepageClub";
+import { url } from "./pages/clubCrackersVariable";
 
 test.describe('Home Page Tests', () => {
 
@@ -11,6 +12,7 @@ test.describe('Home Page Tests', () => {
     test.beforeAll(async () => {
         browser = await chromium.launch({ headless: false });
         context = await browser.newContext();
+        await context.grantPermissions(['geolocation'], { origin: url });
         page = await context.newPage();
         homePage = new HomePage(page);
     });
@@ -28,6 +30,8 @@ test.describe('Home Page Tests', () => {
         await homePage.headerOurFoodTitle();
         await homePage.headerRecipies();
         await homePage.headerRecipiesImg();
+        await homePage.homepageNavigate();
+        await homePage.whereToBuy();
         await homePage.homepageNavigate();
         await homePage.homepageContuctUs();
         await homePage.homepageNavigate();
@@ -47,6 +51,12 @@ test.describe('Home Page Tests', () => {
         await homePage.homepageNavigate();
         await homePage.footerlink();
 
+    })
+    test("ourFood link checking", async () => {
+        test.setTimeout(8000000);
+        await homePage.ourFood();
+        await homePage.homepageNavigate();
+        await homePage.cardRecipies();
     })
 
     test.afterAll(async () => {
