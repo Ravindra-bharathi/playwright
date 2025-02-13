@@ -2,7 +2,7 @@ import { chromium, expect, Page } from "@playwright/test";
 import { url } from "./javasaystemVariable";
 const { exec } = require("child_process");
 import * as fs from 'fs';
-const path = require('path');
+const { JSDOM } = require('jsdom');
 export class HomePage {
     readonly page: Page;
 
@@ -264,22 +264,82 @@ export class HomePage {
     async openExcelInBrowser() {
         await this.page.waitForTimeout(5000);
         const filePath = 'downloads/BCS_DevelopmentComponents.xml';
-        if (fs.existsSync(filePath)) {
-            const openCommand = `start excel "${filePath}"`;
-            exec(openCommand, (error, stdout, stderr) => {
-                if (error) {
-                    console.error(`Error opening file: ${error.message}`);
-                    return;
-                }
-                if (stderr) {
-                    console.error(`stderr: ${stderr}`);
-                    return;
-                }
-                console.log("Excel file opened successfully!");
-            });
-        } else {
-            console.log("File does not exist.");
+        // if (fs.existsSync(filePath)) {
+        //     const openCommand = `start excel "${filePath}"`;
+        //     exec(openCommand, (error, stdout, stderr) => {
+        //         if (error) {
+        //             console.error(`Error opening file: ${error.message}`);
+        //             return;
+        //         }
+        //         if (stderr) {
+        //             console.error(`stderr: ${stderr}`);
+        //             return;
+        //         }
+        //         console.log("Excel file opened successfully!");
+        //     });
+        // } else {
+        //     console.log("File does not exist.");
+        // }
+        try {
+            const xmlData = fs.readFileSync(`${filePath}`, "utf-8");
+            let dom = new JSDOM();
+            let parser = new dom.window.DOMParser();
+            let xmlDoc = parser.parseFromString(xmlData, "text/xml");
+            let elements = xmlDoc.getElementsByTagName("DevelopmentComponentsElement");
+            let htmlContent = `
+            <html>
+            <head><title>Development Components</title></head>
+            <body>
+            <table border="1" cellspacing="0" cellpadding="5">
+                <tr>
+                    <th>Change Number</th>
+                    <th>Applied Date</th>
+                    <th>Version</th>
+                    <th>CSN Component</th>
+                    <th>Vendor</th>
+                    <th>Software Type</th>
+                    <th>Software Component</th>
+                    <th>Name</th>
+                    <th>Location</th>
+                </tr>`;
+
+            for (let i = 0; i < elements.length; i++) {
+                htmlContent += "<tr>";
+                htmlContent += `<td>${elements[i].getElementsByTagName("ChangeNumber")[0]?.textContent || ''}</td>`;
+                htmlContent += `<td>${elements[i].getElementsByTagName("AppliedDate")[0]?.textContent || ''}</td>`;
+                htmlContent += `<td>${elements[i].getElementsByTagName("Version")[0]?.textContent || ''}</td>`;
+                htmlContent += `<td>${elements[i].getElementsByTagName("CsnComponent")[0]?.textContent || ''}</td>`;
+                htmlContent += `<td>${elements[i].getElementsByTagName("Vendor")[0]?.textContent || ''}</td>`;
+                htmlContent += `<td>${elements[i].getElementsByTagName("SoftwareType")[0]?.textContent || ''}</td>`;
+                htmlContent += `<td>${elements[i].getElementsByTagName("SoftwareComponent")[0]?.textContent || ''}</td>`;
+                htmlContent += `<td>${elements[i].getElementsByTagName("Name")[0]?.textContent || ''}</td>`;
+                htmlContent += `<td>${elements[i].getElementsByTagName("Location")[0]?.textContent || ''}</td>`;
+                htmlContent += "</tr>";
+            }
+
+            htmlContent += "</table></body></html>";
+
+            const outputPath = "C:/Users/BCS245/Downloads/BCS_DevelopmentComponents.html";
+            fs.writeFileSync(outputPath, htmlContent);
+
+            console.log("HTML file saved successfully!");
+
+            // Open the file in Playwright
+            const browser = await chromium.launch();
+            const context = await browser.newContext();
+            const page = await context.newPage();
+            await page.goto(`file:///${outputPath}`);
+
+            console.log("Opened in Playwright browser!");
+
+            // Keep the browser open for 100 seconds before closing
+            await page.waitForTimeout(10000);
+            await browser.close();
+
+        } catch (error) {
+            console.error("Error:", error);
         }
+
     }
 
 }
