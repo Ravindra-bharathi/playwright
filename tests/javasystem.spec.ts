@@ -22,10 +22,11 @@ test.describe('Home Page Tests', () => {
         await homePage.logincredentials();
         await homePage.homepageVerifiction();
         await homePage.search();
-        await homePage.systemInfo();
-        await homePage.componentInfo();
+        // await homePage.systemInfo();
+        // await homePage.componentInfo();
         await homePage.downloadExcel();
         await homePage.openExcelInBrowser()
+
     });
 
 

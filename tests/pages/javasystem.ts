@@ -1,5 +1,8 @@
-import { expect, Page } from "@playwright/test";
+import { chromium, expect, Page } from "@playwright/test";
 import { url } from "./javasaystemVariable";
+const { exec } = require("child_process");
+import * as fs from 'fs';
+const path = require('path');
 export class HomePage {
     readonly page: Page;
 
@@ -192,14 +195,13 @@ export class HomePage {
                         emptyCount = 0;
                     }
 
-                    // Check if value is repeating
                     if (previousValues.includes(tableCellValue)) {
                         console.log(tableCellValue, "is repeating, stopping search.");
                         break;
                     } else {
                         console.log(tableCellValue, "is not repeating.");
-                        previousValues.push(tableCellValue); // Store value for future comparison
-                        dependencyTableValue = 3; // Reset table value when scrolling
+                        previousValues.push(tableCellValue);
+                        dependencyTableValue = 3;
                     }
 
                     dependencyTableValue++;
@@ -234,6 +236,13 @@ export class HomePage {
 
     }
     async downloadExcel() {
+        const component = this.page.getByText('Components Info', { exact: true })
+        if (await component.isVisible()) {
+            await component.click();
+        } else {
+            console.log(component, "is not visible")
+        }
+        await this.page.waitForTimeout(5000);
         await this.page.waitForTimeout(2000);
         await this.page.locator('[id="CEPJICNK\\.ComponentInfoView\\.ToolBarButton1"]').click();
         const page1Promise = this.page.waitForEvent('popup');
@@ -241,14 +250,36 @@ export class HomePage {
         await this.page.locator('iframe[name="URLSPW-0"]').contentFrame().getByRole('link', { name: 'BCS_DevelopmentComponents.xls' }).click();
         const page1 = await page1Promise;
         const download = await downloadPromise;
-        const filePath = 'downloads/BCS_DevelopmentComponents.xls';
+        const filePath = 'downloads/BCS_DevelopmentComponents.xml';
         await download.saveAs(filePath);
+
+        if (fs.existsSync(filePath)) {
+            console.log("File downloaded successfully.");
+        } else {
+            console.error("File download failed.");
+        }
+
 
     }
     async openExcelInBrowser() {
-
-
         await this.page.waitForTimeout(5000);
+        const filePath = 'downloads/BCS_DevelopmentComponents.xml';
+        if (fs.existsSync(filePath)) {
+            const openCommand = `start excel "${filePath}"`;
+            exec(openCommand, (error, stdout, stderr) => {
+                if (error) {
+                    console.error(`Error opening file: ${error.message}`);
+                    return;
+                }
+                if (stderr) {
+                    console.error(`stderr: ${stderr}`);
+                    return;
+                }
+                console.log("Excel file opened successfully!");
+            });
+        } else {
+            console.log("File does not exist.");
+        }
     }
 
 }
