@@ -3,6 +3,7 @@ import { url } from "./javasaystemVariable";
 const { exec } = require("child_process");
 import * as fs from 'fs';
 const { JSDOM } = require('jsdom');
+const XLSX = require('xlsx');
 export class HomePage {
     readonly page: Page;
 
@@ -194,14 +195,15 @@ export class HomePage {
                     } else {
                         emptyCount = 0;
                     }
-
-                    if (previousValues.includes(tableCellValue)) {
-                        console.log(tableCellValue, "is repeating, stopping search.");
-                        break;
-                    } else {
-                        console.log(tableCellValue, "is not repeating.");
-                        previousValues.push(tableCellValue);
-                        dependencyTableValue = 3;
+                    if (tableCellValue) {
+                        if (previousValues.includes(tableCellValue)) {
+                            console.log(tableCellValue, "is repeating, stopping search.");
+                            break;
+                        } else {
+                            console.log(tableCellValue, "is not repeating.");
+                            previousValues.push(tableCellValue);
+                            dependencyTableValue = 3;
+                        }
                     }
 
                     dependencyTableValue++;
@@ -264,80 +266,62 @@ export class HomePage {
     async openExcelInBrowser() {
         await this.page.waitForTimeout(5000);
         const filePath = 'downloads/BCS_DevelopmentComponents.xml';
-        // if (fs.existsSync(filePath)) {
-        //     const openCommand = `start excel "${filePath}"`;
-        //     exec(openCommand, (error, stdout, stderr) => {
-        //         if (error) {
-        //             console.error(`Error opening file: ${error.message}`);
-        //             return;
-        //         }
-        //         if (stderr) {
-        //             console.error(`stderr: ${stderr}`);
-        //             return;
-        //         }
-        //         console.log("Excel file opened successfully!");
-        //     });
-        // } else {
-        //     console.log("File does not exist.");
-        // }
         try {
             const xmlData = fs.readFileSync(`${filePath}`, "utf-8");
+
             let dom = new JSDOM();
             let parser = new dom.window.DOMParser();
             let xmlDoc = parser.parseFromString(xmlData, "text/xml");
+
             let elements = xmlDoc.getElementsByTagName("DevelopmentComponentsElement");
-            let htmlContent = `
-            <html>
-            <head><title>Development Components</title></head>
-            <body>
-            <table border="1" cellspacing="0" cellpadding="5">
-                <tr>
-                    <th>Change Number</th>
-                    <th>Applied Date</th>
-                    <th>Version</th>
-                    <th>CSN Component</th>
-                    <th>Vendor</th>
-                    <th>Software Type</th>
-                    <th>Software Component</th>
-                    <th>Name</th>
-                    <th>Location</th>
-                </tr>`;
+
+            let data = [["Change Number", "Applied Date", "Version", "CSN Component", "Vendor", "Software Type", "Software Component", "Name", "Location"]];
 
             for (let i = 0; i < elements.length; i++) {
-                htmlContent += "<tr>";
-                htmlContent += `<td>${elements[i].getElementsByTagName("ChangeNumber")[0]?.textContent || ''}</td>`;
-                htmlContent += `<td>${elements[i].getElementsByTagName("AppliedDate")[0]?.textContent || ''}</td>`;
-                htmlContent += `<td>${elements[i].getElementsByTagName("Version")[0]?.textContent || ''}</td>`;
-                htmlContent += `<td>${elements[i].getElementsByTagName("CsnComponent")[0]?.textContent || ''}</td>`;
-                htmlContent += `<td>${elements[i].getElementsByTagName("Vendor")[0]?.textContent || ''}</td>`;
-                htmlContent += `<td>${elements[i].getElementsByTagName("SoftwareType")[0]?.textContent || ''}</td>`;
-                htmlContent += `<td>${elements[i].getElementsByTagName("SoftwareComponent")[0]?.textContent || ''}</td>`;
-                htmlContent += `<td>${elements[i].getElementsByTagName("Name")[0]?.textContent || ''}</td>`;
-                htmlContent += `<td>${elements[i].getElementsByTagName("Location")[0]?.textContent || ''}</td>`;
-                htmlContent += "</tr>";
+                let row = [
+                    elements[i].getElementsByTagName("ChangeNumber")[0]?.textContent || '',
+                    elements[i].getElementsByTagName("AppliedDate")[0]?.textContent || '',
+                    elements[i].getElementsByTagName("Version")[0]?.textContent || '',
+                    elements[i].getElementsByTagName("CsnComponent")[0]?.textContent || '',
+                    elements[i].getElementsByTagName("Vendor")[0]?.textContent || '',
+                    elements[i].getElementsByTagName("SoftwareType")[0]?.textContent || '',
+                    elements[i].getElementsByTagName("SoftwareComponent")[0]?.textContent || '',
+                    elements[i].getElementsByTagName("Name")[0]?.textContent || '',
+                    elements[i].getElementsByTagName("Location")[0]?.textContent || ''
+                ];
+                data.push(row);
             }
 
-            htmlContent += "</table></body></html>";
+            const workbook = XLSX.utils.book_new();
+            const worksheet = XLSX.utils.aoa_to_sheet(data);
+            XLSX.utils.book_append_sheet(workbook, worksheet, "DevelopmentComponents");
 
-            const outputPath = "C:/Users/BCS245/Downloads/BCS_DevelopmentComponents.html";
-            fs.writeFileSync(outputPath, htmlContent);
+            const outputPath = "C:/Users/BCS245/Downloads/BCS_DevelopmentComponents.xlsx";
+            XLSX.writeFile(workbook, outputPath);
 
-            console.log("HTML file saved successfully!");
+            console.log(" XLSX file saved successfully!");
 
-            // Open the file in Playwright
-            const browser = await chromium.launch();
-            const context = await browser.newContext();
-            const page = await context.newPage();
-            await page.goto(`file:///${outputPath}`);
-
-            console.log("Opened in Playwright browser!");
-
-            // Keep the browser open for 100 seconds before closing
-            await page.waitForTimeout(10000);
-            await browser.close();
 
         } catch (error) {
-            console.error("Error:", error);
+            console.error(" Error:", error);
+        }
+
+        const outputPath = "C:/Users/BCS245/Downloads/BCS_DevelopmentComponents.xlsx";
+        if (fs.existsSync(outputPath)) {
+            const openCommand = `start excel "${outputPath}"`;
+            exec(openCommand, (error: { message: any; }, stdout: any, stderr: any) => {
+                if (error) {
+                    console.error(`Error opening file: ${error.message}`);
+                    return;
+                }
+                if (stderr) {
+                    console.error(`stderr: ${stderr}`);
+                    return;
+                }
+                console.log("Excel file opened successfully!");
+            });
+        } else {
+            console.log("File does not exist.");
         }
 
     }

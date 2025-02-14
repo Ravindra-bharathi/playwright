@@ -18,13 +18,13 @@ test.describe('Home Page Tests', () => {
 
     test("Navigate to SAP Home page", async () => {
         test.setTimeout(100000000);
-        // await homePage.loginUrl();
-        // await homePage.logincredentials();
-        // await homePage.homepageVerifiction();
-        // await homePage.search();
-        // // await homePage.systemInfo();
-        // // await homePage.componentInfo();
-        // await homePage.downloadExcel();
+        await homePage.loginUrl();
+        await homePage.logincredentials();
+        await homePage.homepageVerifiction();
+        await homePage.search();
+        await homePage.systemInfo();
+        await homePage.componentInfo();
+        await homePage.downloadExcel();
         await homePage.openExcelInBrowser()
 
     });

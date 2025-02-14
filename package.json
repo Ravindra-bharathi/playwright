@@ -16,6 +16,7 @@
     "jsdom": "^26.0.0",
     "lodash": "^4.17.21",
     "nodemailer": "^6.9.16",
-    "playwright-ui5": "^1.6.5"
+    "playwright-ui5": "^1.6.5",
+    "xlsx": "^0.18.5"
   }
 }
