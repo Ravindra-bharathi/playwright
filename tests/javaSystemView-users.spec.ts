@@ -19,10 +19,15 @@ test.describe('Home Page Tests', () => {
     test("Navigate to SAP Home page", async () => {
         test.setTimeout(100000000);
         await homePage.loginUrl();
+        await page.waitForTimeout(2000);
         await homePage.logincredentials();
+        await page.waitForTimeout(2000);
         await homePage.homepageVerifiction();
+        await page.waitForTimeout(2000);
         await homePage.searchUsers();
+        await page.waitForTimeout(2000);
         await homePage.verificationSearch();
+        await page.waitForTimeout(2000);
         await homePage.searchUser();
 
     });
