@@ -1,5 +1,5 @@
 import { test, chromium, Browser, Page, BrowserContext } from "@playwright/test";
-import { HomePage } from "./javasystemDestnation.ts/destination";
+import { HomePage } from "./javasystemDestnation/destination";
 
 test.describe('Home Page Tests', () => {
     test.setTimeout(100000000);
