@@ -292,6 +292,7 @@ export class HomePage {
             await expect(savedValue).toBeVisible()
             const result = await savedValue.textContent()
             console.log(result, 'value')
+            console.log(`**gbStart**created user**splitKeyValue**${result}**gbEnd**`)
         }
         else {
             console.log('user is not created there is an issue in creating user')
