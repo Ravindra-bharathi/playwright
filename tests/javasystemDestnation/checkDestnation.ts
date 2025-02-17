@@ -116,6 +116,7 @@ export class HomePage {
             const pingText = await pingResult.textContent();
 
             console.log(pingText);
+            console.log(`**gbStart**PingText**splitKeyValue**${pingText}**gbEnd**`)
             await this.page.waitForTimeout(2000)
             const connect = this.page.locator('[id="CEPJICNK\\.DetailsView\\.Con_TLS_Props_Interface_View_Tab-title"]');
             if (await connect.isVisible()) {
