@@ -1,6 +1,6 @@
 import { expect, Page } from "@playwright/test";
 import { url } from "../pages/javasaystemVariable";
-export class HomePage {
+export class viewUserHomePage {
     readonly page: Page;
 
     constructor(page: Page) {
