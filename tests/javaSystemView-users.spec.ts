@@ -1,7 +1,7 @@
 import { test, chromium, Browser, Page, BrowserContext } from "@playwright/test";
 import { HomePage } from "./view-users/view-users";
 
-test.describe('Home Page Tests', () => {
+test.describe(() => {
     test.setTimeout(100000000);
     let browser: Browser;
     let context: BrowserContext;
@@ -16,7 +16,7 @@ test.describe('Home Page Tests', () => {
 
     });
 
-    test("Navigate to SAP Home page", async () => {
+    test("Navigate to SAP java system Home page", async () => {
         test.setTimeout(100000000);
         await homePage.loginUrl();
         await page.waitForTimeout(2000);
