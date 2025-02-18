@@ -1,18 +1,18 @@
 import { test, chromium, Browser, Page, BrowserContext } from "@playwright/test";
-import { HomePage } from "./view-users/view-users";
+import { viewUserHomePage } from "./view-users/view-users";
 
 test.describe(() => {
     test.setTimeout(100000000);
     let browser: Browser;
     let context: BrowserContext;
     let page: Page;
-    let homePage: HomePage;
+    let homePage: viewUserHomePage;
 
     test.beforeAll(async () => {
         browser = await chromium.launch({ headless: false });
         context = await browser.newContext();
         page = await context.newPage();
-        homePage = new HomePage(page);
+        homePage = new viewUserHomePage(page);
 
     });
 
