@@ -1,10 +1,8 @@
-import { test, Browser, Page, BrowserContext } from "@playwright/test";
+import { test, Page } from "@playwright/test";
 import { viewUserHomePage } from "./view-users/view-users";
 
 test.describe(() => {
     test.setTimeout(100000000);
-    let browser: Browser;
-    let context: BrowserContext;
     let page: Page;
     let homePage: viewUserHomePage;
 
