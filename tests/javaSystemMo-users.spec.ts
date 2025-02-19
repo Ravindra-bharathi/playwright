@@ -8,10 +8,8 @@ test.describe('Home Page Tests', () => {
     let page: Page;
     let homePage: HomePage;
 
-    test.beforeAll(async () => {
-        browser = await chromium.launch({ headless: false });
-        context = await browser.newContext();
-        page = await context.newPage();
+    test.beforeAll(async ({ browser }) => {
+        page = await browser.newPage();
         homePage = new HomePage(page);
 
     });
@@ -28,6 +26,6 @@ test.describe('Home Page Tests', () => {
     });
 
     test.afterAll(async () => {
-        await browser.close();
+        await page.close();
     });
 });
