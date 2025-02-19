@@ -1,4 +1,4 @@
-import { test, chromium, Browser, Page, BrowserContext } from "@playwright/test";
+import { test, Browser, Page, BrowserContext } from "@playwright/test";
 import { viewUserHomePage } from "./view-users/view-users";
 
 test.describe(() => {
@@ -8,10 +8,9 @@ test.describe(() => {
     let page: Page;
     let homePage: viewUserHomePage;
 
-    test.beforeAll(async () => {
-        browser = await chromium.launch({ headless: false });
-        context = await browser.newContext();
-        page = await context.newPage();
+
+    test.beforeAll(async ({ browser }) => {
+        page = await browser.newPage();
         homePage = new viewUserHomePage(page);
 
     });
@@ -30,9 +29,5 @@ test.describe(() => {
         await page.waitForTimeout(2000);
         await homePage.searchUser();
 
-    });
-
-    test.afterAll(async () => {
-        await browser.close();
     });
 });
