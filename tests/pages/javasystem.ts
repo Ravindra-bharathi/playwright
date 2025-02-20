@@ -1,5 +1,4 @@
 import { chromium, expect, Page } from "@playwright/test";
-import { url } from "./javasaystemVariable";
 const { exec } = require("child_process");
 import * as fs from 'fs';
 const { JSDOM } = require('jsdom');
@@ -12,13 +11,13 @@ export class HomePage {
     }
 
     async loginUrl() {
-        await this.page.goto(url, { timeout: 90000 });
+        await this.page.goto('http://168.61.98.131:50000/nwa', { timeout: 90000 });
         await this.page.waitForTimeout(5000);
     }
     async logincredentials() {
         const idBox = this.page.getByRole('textbox', { name: 'User *' });
         if (await idBox.isVisible()) {
-            await idBox.fill('replaytest');
+            await idBox.fill('$username');
         }
         else {
             console.log("id is not filled in id feild")
@@ -26,7 +25,7 @@ export class HomePage {
         const PasswordBox = this.page.getByRole('textbox', { name: 'Password *' });
         if (await PasswordBox.isVisible()) {
             await PasswordBox.click();
-            await PasswordBox.fill('H3r3andTh3r3')
+            await PasswordBox.fill('$password')
         }
         else {
             console.log("password is not filled in the feild")

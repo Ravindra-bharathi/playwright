@@ -1,10 +1,8 @@
-import { test, chromium, Browser, Page, BrowserContext } from "@playwright/test";
+import { test, Page } from "@playwright/test";
 import { HomePage } from "./javasystemCreateUser/createuser";
 
 test.describe(() => {
     test.setTimeout(100000000);
-    let browser: Browser;
-    let context: BrowserContext;
     let page: Page;
     let homePage: HomePage;
 
