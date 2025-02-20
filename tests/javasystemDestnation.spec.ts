@@ -1,7 +1,7 @@
 import { test, Browser, Page, BrowserContext } from "@playwright/test";
 import { HomePage } from "./javasystemDestnation/destination";
 
-test.describe('Home Page Tests', () => {
+test.describe(() => {
     test.setTimeout(100000000);
     let browser: Browser;
     let context: BrowserContext;
