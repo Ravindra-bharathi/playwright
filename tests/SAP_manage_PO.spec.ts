@@ -1,6 +1,6 @@
 import { test, Page, selectors } from '@playwright/test';
 import { css, xpath } from 'playwright-ui5'
-import { managepurchaseorder, userName, userPassword } from './sapui5variable';
+import { managepurchaseorder, userName, userPassword } from './SAP_manage_PO_variable';
 
 test.describe(() => {
     test.setTimeout(800000);
@@ -9,7 +9,7 @@ test.describe(() => {
         page = await browser.newPage();
     });
 
-    test('SAPui5', async () => {
+    test('SAPui5_ManagePO', async () => {
         await selectors.register('ui5-css', css);
         await selectors.register('ui5-xpath', xpath);
         await page.goto('https://my415865.s4hana.cloud.sap/ui#/Shell-home');
