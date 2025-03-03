@@ -8,7 +8,7 @@ test.describe(() => {
         page = await browser.newPage();
     });
 
-    test("Navigate to ", async () => {
+    test("Navigate to Lead ", async () => {
         await page.goto(url);
         await page.waitForTimeout(5000);
         await page.getByRole('textbox', { name: 'Username' }).click();
