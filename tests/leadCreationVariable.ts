@@ -1,0 +1,12 @@
+export const url = 'https://basiscloudsolutionspvtltd--dineshdev.sandbox.my.salesforce.com/';
+export const username = 'vijayakumarp@basiscloudsolutions.com.dineshdev';
+export const password = 'Dinesh@123';
+export const firstName = 'Thiyagan';
+export const lastName = 'selvan';
+export const salutation = 'Mr.';
+export const email = 'thiyagan.selvan5a@gmail.com';
+export const phone = '1234567890';
+export const company = 'Basiscloudsolutions';
+export const City = 'Tamil Nadu';
+export const product = 'Soda Ash Powder';
+export const leadStatus = 'Call Disconnected';
