@@ -43,5 +43,11 @@ test.describe(() => {
         await expect(page.locator('.timelineItem')).toBeVisible();
         await page.waitForTimeout(2000);
         await expect(page.getByAltText('Task', { exact: true })).toBeVisible();
+        await page.waitForTimeout(2000);
+        const activity = page.getByAltText('Task', { exact: true });
+        if (await activity.isVisible()) {
+            const activityCreationStatus = "activity is created"
+            console.log(`**gbStart**activityCreationStatus**splitKeyValue**${activityCreationStatus}**gbEnd**`);
+        }
     });
 });
