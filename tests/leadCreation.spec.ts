@@ -59,6 +59,6 @@ test.describe(() => {
         await page.waitForTimeout(2000);
         await page.getByText('Chosen', { exact: true }).click();
         await page.getByRole('button', { name: 'Save', exact: true }).click();
-        console.log(`**gbStart**leadCreationName**splitKeyValue**${firstName}**gbEnd**`);
+        console.log(`**gbStart**leadCreationName**splitKeyValue**${firstName}${lastName}**gbEnd**`);
     });
 });
