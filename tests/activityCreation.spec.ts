@@ -1,5 +1,5 @@
 import { test, Page, expect } from '@playwright/test';
-import { firstName, lastName, leadStatus, password, url, username } from './leadCreationVariable';
+import { email, firstName, lastName, leadStatus, password, url, username } from './leadCreationVariable';
 
 // test.describe(() => {
 //     test.setTimeout(800000);
@@ -26,10 +26,13 @@ test("Navigate to Lead ", async ({ browser }) => {
     await page.waitForTimeout(2000);
     await page.getByRole('option', { name: 'Sales', exact: true }).click();
     await page.waitForTimeout(2000);
-    await page.getByRole('button', { name: 'Search' }).click();
-    await page.getByRole('searchbox', { name: 'Search...' }).fill(`${firstName} ${lastName}`);
+    await page.getByRole('link', { name: 'Leads' }).click();
     await page.waitForTimeout(2000);
-    await page.locator(`span[title="${firstName} ${lastName}"]`).nth(0).click();
+    await page.getByRole('searchbox', { name: 'Search this list...' }).click();
+    await page.getByRole('searchbox', { name: 'Search this list...' }).fill(email);
+    await page.getByRole('searchbox', { name: 'Search this list...' }).press('Enter');
+    await page.waitForTimeout(2000);
+    await page.getByRole('link', { name: `${firstName} ${lastName}` }).click();
     await page.waitForTimeout(2000);
     await page.getByRole('tab', { name: 'Details' }).click();
     await page.waitForTimeout(2000);
@@ -53,6 +56,9 @@ test("Navigate to Lead ", async ({ browser }) => {
     await expect(page.getByAltText('Task', { exact: true })).toBeVisible();
     await page.waitForTimeout(2000);
     const activity = page.getByAltText('Task', { exact: true });
+    await page.locator('a').filter({ hasText: '<p>"Follow-up: Call' }).click();
+    await page.getByLabel('Highlights panel header').getByText('<p>"Follow-up: Call').click();
+    await expect(page.getByLabel('Highlights panel header').getByText('<p>"Follow-up: Call')).toBeVisible();
     if (await activity.isVisible()) {
         const activityCreationStatus = "activity is created"
         console.log(`**gbStart**activityCreationStatus**splitKeyValue**${activityCreationStatus}**gbEnd**`);
