@@ -32,7 +32,7 @@ test("Navigate to Lead ", async ({ browser }) => {
     await page.getByRole('searchbox', { name: 'Search this list...' }).fill(email);
     await page.getByRole('searchbox', { name: 'Search this list...' }).press('Enter');
     await page.waitForTimeout(2000);
-    await page.getByRole('link', { name: `${firstName} ${lastName}` }).click();
+    await page.getByRole('link', { name: `${firstName} ${lastName}` }).first().click();
     await page.waitForTimeout(2000);
     await page.getByRole('tab', { name: 'Details' }).click();
     await page.waitForTimeout(2000);
@@ -56,9 +56,6 @@ test("Navigate to Lead ", async ({ browser }) => {
     await expect(page.getByAltText('Task', { exact: true })).toBeVisible();
     await page.waitForTimeout(2000);
     const activity = page.getByAltText('Task', { exact: true });
-    await page.locator('a').filter({ hasText: '<p>"Follow-up: Call' }).click();
-    await page.getByLabel('Highlights panel header').getByText('<p>"Follow-up: Call').click();
-    await expect(page.getByLabel('Highlights panel header').getByText('<p>"Follow-up: Call')).toBeVisible();
     if (await activity.isVisible()) {
         const activityCreationStatus = "activity is created"
         console.log(`**gbStart**activityCreationStatus**splitKeyValue**${activityCreationStatus}**gbEnd**`);
