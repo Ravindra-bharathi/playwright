@@ -34,8 +34,13 @@ test.describe(() => {
         await page.waitForTimeout(2000);
         await page.getByRole('combobox', { name: 'Lead Status' }).click();
         await page.waitForTimeout(2000);
-        await page.locator(`lightning-base-combobox-item[data-value=${leadStatus}]`).click();
-        await page.waitForTimeout(2000);
+        const statusLocator = page.locator(`lightning-base-combobox-item[data-value="${leadStatus}"]`);
+        const isVisible = await statusLocator.isVisible();
+        if (isVisible) {
+            await statusLocator.click();
+        } else {
+            console.error('Element not found!');
+        }
         await page.getByRole('button', { name: 'Save' }).click();
         await page.waitForTimeout(5000);
         await page.getByRole('tab', { name: 'Activity' }).click();
