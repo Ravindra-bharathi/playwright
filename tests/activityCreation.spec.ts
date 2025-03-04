@@ -26,7 +26,8 @@ test.describe(() => {
         await page.getByRole('button', { name: 'Search' }).click();
         await page.getByRole('searchbox', { name: 'Search...' }).fill(`${firstName} ${lastName}`);
         await page.waitForTimeout(2000);
-        await page.getByTitle(`${firstName} ${lastName}`, { exact: true }).click();
+        // await page.getByTitle(`${firstName} ${lastName}`, { exact: true }).click();
+        await page.locator(`span[title="${firstName} ${lastName}"]`).nth(0).click();
         await page.waitForTimeout(2000);
         await page.getByRole('tab', { name: 'Details' }).click();
         await page.waitForTimeout(2000);
