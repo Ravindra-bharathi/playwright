@@ -47,7 +47,7 @@ test("Navigate to salesforce ", async ({ browser }) => {
     await page.getByRole('textbox', { name: 'Email' }).fill(email);
     await page.waitForTimeout(2000);
     await page.getByLabel('Available').getByText(product).click();
-    await page.getByRole('button', { name: 'Move to Chosen Move selection' }).click();
+    await page.getByLabel('*Product').getByRole('button', { name: 'Move to Chosen Move selection' }).click();
     await page.waitForTimeout(2000);
     await page.getByRole('combobox', { name: 'Quantity' }).click();
     await page.waitForTimeout(2000);
@@ -60,7 +60,6 @@ test("Navigate to salesforce ", async ({ browser }) => {
     await page.waitForTimeout(2000);
     await page.locator('records-record-layout-item').filter({ hasText: 'Website' }).locator('span').click();
     await page.waitForTimeout(2000);
-    await page.getByText('Chosen', { exact: true }).click();
     await page.getByRole('button', { name: 'Save', exact: true }).click();
     console.log(`**gbStart**leadCreationName**splitKeyValue**${firstName}${lastName}**gbEnd**`);
 });
