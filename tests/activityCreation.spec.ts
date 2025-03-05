@@ -9,7 +9,7 @@ test.describe(() => {
         page = await browser.newPage();
     });
 
-    test("Navigate to Lead and Update Status", async ({ page }) => {
+    test("Navigate to Lead and Update Status", async () => {
         test.setTimeout(800000);
 
         try {

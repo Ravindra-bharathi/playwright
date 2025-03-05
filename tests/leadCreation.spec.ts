@@ -9,7 +9,7 @@ test.describe(() => {
         page = await browser.newPage();
     });
 
-    test("Navigate to Salesforce and Create a Lead", async ({ page }) => {
+    test("Navigate to Salesforce and Create a Lead", async () => {
         test.setTimeout(800000);
         try {
             await page.goto(url);
