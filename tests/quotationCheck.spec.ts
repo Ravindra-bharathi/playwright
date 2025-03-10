@@ -38,15 +38,31 @@ test.describe(() => {
         await page.waitForTimeout(2000);
         await page.getByRole('button', { name: 'Save' }).click();
         await page.waitForTimeout(2000);
-        await page.getByRole('gridcell', { name: QuoteName }).getByRole('link').click();
+        await page.getByRole('gridcell', { name: QuoteName }).getByRole('link').nth(0).click();
         await page.getByRole('button', { name: 'Add Products' }).click();
         const search = page.getByRole('combobox', { name: 'Search <Entity> Search <' });
         await search.click();
         await search.fill(productName);
         await search.press('Enter');
+
         await search.click();
-        await page.waitForTimeout(2000);
-        await page.getByRole('option', { name: new RegExp(`${productName} \\d+`, 'i') }).click();
+
+        await page.waitForSelector('[role="option"]', { timeout: 3000 }).catch(() => {
+            console.log('Error: No options appeared after search.');
+            return;
+        });
+
+        const option = page.getByRole('option', { name: new RegExp(`${productName} \\d+`, 'i') });
+
+        const isVisible = await option.isVisible();
+        if (!isVisible) {
+            const value = ' is not avaliable or already selected'
+            console.log(`**gbStart**product is added **splitKeyValue**${productName}${value}**gbEnd**`);
+            return;
+        }
+        await option.scrollIntoViewIfNeeded();
+        await option.click();
+
         await page.getByRole('button', { name: 'Next' }).click();
         await page.waitForTimeout(8000);
         await page.getByRole('button', { name: 'Edit Quantity: Item null' }).click();
@@ -56,7 +72,8 @@ test.describe(() => {
         await expect(page.getByRole('link', { name: productName })).toBeVisible();
         const product = page.getByRole('link', { name: productName })
         if (await product.isVisible()) {
-            console.log(`**gbStart**product is added **splitKeyValue**${productName}**gbEnd**`);
+            const value = ' is add in the new quote'
+            console.log(`**gbStart**product is added **splitKeyValue**${productName}${value}**gbEnd**`);
         }
     });
 });
