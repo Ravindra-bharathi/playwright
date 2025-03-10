@@ -51,18 +51,9 @@ test.describe(() => {
             console.log('Error: No options appeared after search.');
             return;
         });
-
+        await page.pause();
         const option = page.getByRole('option', { name: new RegExp(`${productName} \\d+`, 'i') });
-
-        const isVisible = await option.isVisible();
-        if (!isVisible) {
-            const value = ' is not avaliable or already selected'
-            console.log(`**gbStart**product is added **splitKeyValue**${productName}${value}**gbEnd**`);
-            return;
-        }
-        await option.scrollIntoViewIfNeeded();
         await option.click();
-
         await page.getByRole('button', { name: 'Next' }).click();
         await page.waitForTimeout(8000);
         await page.getByRole('button', { name: 'Edit Quantity: Item null' }).click();
