@@ -45,15 +45,16 @@ test.describe(() => {
         await search.waitFor();
         await search.click();
         await search.fill(productName);
+        await search.press('Enter');
         await search.click();
-        await page.getByRole('option', { name: 'Soda Ash Powder 004' }).click();
+        await page.getByRole('option', { name: new RegExp(`${productName} \\d+`, 'i') }).click();
         await page.getByRole('button', { name: 'Next' }).click();
+        await page.waitForTimeout(2000);
         await page.getByRole('button', { name: 'Edit Quantity: Item null' }).click();
         await page.getByRole('textbox', { name: 'Quantity *' }).fill(Quantity);
         await page.waitForTimeout(2000);
         await page.getByRole('button', { name: 'Save' }).click();
         await expect(page.getByRole('link', { name: productName })).toBeVisible();
-
         const product = page.getByRole('link', { name: productName })
         if (await product.isVisible()) {
             console.log(`**gbStart**product is added **splitKeyValue**${productName}**gbEnd**`);
