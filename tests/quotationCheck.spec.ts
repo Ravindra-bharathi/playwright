@@ -11,7 +11,6 @@ test.describe(() => {
 
     test("Navigate to opportunity page", async () => {
         test.setTimeout(800000);
-        test.setTimeout(800000);
         await page.goto(url);
         await page.waitForTimeout(5000);
         await page.getByRole('textbox', { name: 'Username' }).click();
@@ -42,14 +41,14 @@ test.describe(() => {
         await page.getByRole('gridcell', { name: QuoteName }).getByRole('link').click();
         await page.getByRole('button', { name: 'Add Products' }).click();
         const search = page.getByRole('combobox', { name: 'Search <Entity> Search <' });
-        await search.waitFor();
         await search.click();
         await search.fill(productName);
         await search.press('Enter');
         await search.click();
+        await page.waitForTimeout(2000);
         await page.getByRole('option', { name: new RegExp(`${productName} \\d+`, 'i') }).click();
         await page.getByRole('button', { name: 'Next' }).click();
-        await page.waitForTimeout(2000);
+        await page.waitForTimeout(8000);
         await page.getByRole('button', { name: 'Edit Quantity: Item null' }).click();
         await page.getByRole('textbox', { name: 'Quantity *' }).fill(Quantity);
         await page.waitForTimeout(2000);
