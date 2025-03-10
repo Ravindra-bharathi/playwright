@@ -51,7 +51,6 @@ test.describe(() => {
             console.log('Error: No options appeared after search.');
             return;
         });
-        await page.pause();
         const option = page.getByRole('option', { name: new RegExp(`${productName} \\d+`, 'i') });
         await option.click();
         await page.getByRole('button', { name: 'Next' }).click();
