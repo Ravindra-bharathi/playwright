@@ -66,6 +66,7 @@ test.describe(() => {
         await page.getByRole('button', { name: 'Next' }).click();
         await page.waitForTimeout(8000);
         await page.getByRole('button', { name: 'Edit Quantity: Item null' }).click();
+        await page.waitForTimeout(8000);
         await page.getByRole('textbox', { name: 'Quantity *' }).fill(Quantity);
         await page.waitForTimeout(2000);
         await page.getByRole('button', { name: 'Save' }).click();
