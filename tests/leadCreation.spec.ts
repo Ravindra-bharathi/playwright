@@ -54,9 +54,6 @@ test.describe(() => {
         await page.waitForTimeout(2000);
         await page.getByRole('button', { name: 'Save', exact: true }).click();
         expect(page.getByRole('heading', { name: `Lead ${salutation} ${firstName} ${lastName}` }).locator('slot').nth(1));
-        const leadCreationName = page.getByRole('heading', { name: `Lead ${salutation} ${firstName} ${lastName}` }).locator('slot').nth(1)
-        if (await leadCreationName.isVisible()) {
-            console.log(`**gbStart**leadCreationName**splitKeyValue**${firstName}${lastName}**gbEnd**`);
-        }
+        console.log(`**gbStart**leadCreationName**splitKeyValue**${firstName}${lastName}**gbEnd**`)
     });
 });
