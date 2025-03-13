@@ -9,4 +9,4 @@ export const phone = '$phone';
 export const company = '$company';
 export const City = '$city';
 export const product = '$product';
-export const leadStatus = '$leadstatus';
+export const Quantity = '$quantity';

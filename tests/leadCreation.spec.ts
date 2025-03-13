@@ -1,5 +1,5 @@
 import { test, Page, selectors } from '@playwright/test';
-import { City, company, email, firstName, lastName, password, phone, product, salutation, url, username } from './leadCreationVariable';
+import { company, email, firstName, lastName, password, phone, product, Quantity, salutation, url, username } from './leadCreationVariable';
 
 test.describe(() => {
     test.setTimeout(800000);
@@ -49,19 +49,12 @@ test.describe(() => {
         await page.getByLabel('Available').getByText(product).click();
         await page.getByLabel('*Product').getByRole('button', { name: 'Move to Chosen Move selection' }).click();
         await page.waitForTimeout(2000);
-        await page.waitForTimeout(2000);
-        await page.getByRole('combobox', { name: 'Quantity' }).click();
-        await page.waitForTimeout(2000);
-        await page.getByLabel('New Lead').getByText('1KG').click();
-        await page.waitForTimeout(2000);
-        await page.getByRole('textbox', { name: 'Title' }).click();
-        await page.waitForTimeout(2000);
-        await page.getByRole('textbox', { name: 'City' }).click();
-        await page.getByRole('textbox', { name: 'City' }).fill(City);
-        await page.waitForTimeout(2000);
-        await page.locator('records-record-layout-item').filter({ hasText: 'Website' }).locator('span').click();
+        await page.getByText(Quantity).click();
+        await page.getByLabel('Quantity').getByRole('button', { name: 'Move to Chosen Move selection' }).click();
         await page.waitForTimeout(2000);
         await page.getByRole('button', { name: 'Save', exact: true }).click();
+        await page.getByRole('heading', { name: `Lead ${salutation} ${firstName} ${lastName}` }).locator('slot').nth(1).click();
+        await page.pause();
         console.log(`**gbStart**leadCreationName**splitKeyValue**${firstName}${lastName}**gbEnd**`);
     });
 });
