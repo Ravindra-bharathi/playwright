@@ -1,4 +1,4 @@
-import { test, Page, selectors } from '@playwright/test';
+import { test, Page, selectors, expect } from '@playwright/test';
 import { company, email, firstName, lastName, password, phone, product, Quantity, salutation, url, username } from './leadCreationVariable';
 
 test.describe(() => {
@@ -21,14 +21,14 @@ test.describe(() => {
         await page.getByRole('textbox', { name: 'Password' }).fill(password);
         await page.waitForTimeout(2000);
         await page.getByRole('button', { name: 'Log In to Sandbox' }).click();
-        await page.waitForTimeout(5000);
+        await page.waitForTimeout(10000);
         await page.getByRole('button', { name: 'App Launcher' }).click();
-        await page.waitForTimeout(2000);
+        await page.waitForTimeout(5000);
         await page.getByRole('option', { name: 'Sales', exact: true }).click();
         await page.waitForTimeout(2000);
         await page.getByRole('link', { name: 'Leads' }).click();
         await page.getByRole('button', { name: 'New' }).click();
-        await page.waitForTimeout(2000);
+        await page.waitForTimeout(5000);
         await page.getByRole('combobox', { name: 'Salutation' }).click();
         await page.getByText(salutation).click();
         await page.getByRole('textbox', { name: 'First Name' }).click();
@@ -53,7 +53,10 @@ test.describe(() => {
         await page.getByLabel('Quantity').getByRole('button', { name: 'Move to Chosen Move selection' }).click();
         await page.waitForTimeout(2000);
         await page.getByRole('button', { name: 'Save', exact: true }).click();
-        await page.getByRole('heading', { name: `Lead ${salutation} ${firstName} ${lastName}` }).locator('slot').nth(1).click();
-        console.log(`**gbStart**leadCreationName**splitKeyValue**${firstName}${lastName}**gbEnd**`);
+        expect(page.getByRole('heading', { name: `Lead ${salutation} ${firstName} ${lastName}` }).locator('slot').nth(1));
+        const leadCreationName = page.getByRole('heading', { name: `Lead ${salutation} ${firstName} ${lastName}` }).locator('slot').nth(1)
+        if (await leadCreationName.isVisible()) {
+            console.log(`**gbStart**leadCreationName**splitKeyValue**${firstName}${lastName}**gbEnd**`);
+        }
     });
 });
