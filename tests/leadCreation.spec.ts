@@ -54,7 +54,6 @@ test.describe(() => {
         await page.waitForTimeout(2000);
         await page.getByRole('button', { name: 'Save', exact: true }).click();
         await page.getByRole('heading', { name: `Lead ${salutation} ${firstName} ${lastName}` }).locator('slot').nth(1).click();
-        await page.pause();
         console.log(`**gbStart**leadCreationName**splitKeyValue**${firstName}${lastName}**gbEnd**`);
     });
 });
