@@ -52,7 +52,6 @@ test.describe(() => {
             await page.waitForTimeout(2000);
 
         }
-        await page.pause();
         for (const Quantity of Quantitys) {
             await page.getByText(Quantity).click();
             await page.getByLabel('Quantity').getByRole('button', { name: 'Move to Chosen Move selection' }).click();
