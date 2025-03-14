@@ -8,5 +8,5 @@ export const email = '$email';
 export const phone = '$phone';
 export const company = '$company';
 export const City = '$city';
-export const product = '$product';
-export const Quantity = '$quantity';
+export const products = '$products';
+export const Quantitys = '$quantitys';

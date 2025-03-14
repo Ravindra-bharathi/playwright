@@ -1,5 +1,5 @@
 import { test, Page, selectors, expect } from '@playwright/test';
-import { company, email, firstName, lastName, password, phone, product, Quantity, salutation, url, username } from './leadCreationVariable';
+import { company, email, firstName, lastName, password, phone, products, Quantitys, salutation, url, username } from './leadCreationVariable';
 
 test.describe(() => {
     test.setTimeout(800000);
@@ -46,12 +46,19 @@ test.describe(() => {
         await page.getByRole('textbox', { name: 'Email' }).click();
         await page.getByRole('textbox', { name: 'Email' }).fill(email);
         await page.waitForTimeout(2000);
-        await page.getByLabel('Available').getByText(product).click();
-        await page.getByLabel('*Product').getByRole('button', { name: 'Move to Chosen Move selection' }).click();
-        await page.waitForTimeout(2000);
-        await page.getByText(Quantity).click();
-        await page.getByLabel('Quantity').getByRole('button', { name: 'Move to Chosen Move selection' }).click();
-        await page.waitForTimeout(2000);
+        for (const product of products) {
+            await page.getByLabel('Available').getByText(product).click();
+            await page.getByLabel('*Product').getByRole('button', { name: 'Move to Chosen Move selection' }).click();
+            await page.waitForTimeout(2000);
+
+        }
+        await page.pause();
+        for (const Quantity of Quantitys) {
+            await page.getByText(Quantity).click();
+            await page.getByLabel('Quantity').getByRole('button', { name: 'Move to Chosen Move selection' }).click();
+            await page.waitForTimeout(2000);
+        }
+
         await page.getByRole('button', { name: 'Save', exact: true }).click();
         expect(page.getByRole('heading', { name: `Lead ${salutation} ${firstName} ${lastName}` }).locator('slot').nth(1));
         console.log(`**gbStart**leadCreationName**splitKeyValue**${firstName}${lastName}**gbEnd**`)
