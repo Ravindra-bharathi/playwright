@@ -53,6 +53,8 @@ test.describe(() => {
                 console.log(`**gbStart**leadStatus**splitKeyValue**${leadStatus}**gbEnd**`);
             }
             else {
+                const leadStatus = 'The Lead status is open '
+                console.log(`**gbStart**leadStatus**splitKeyValue**${leadStatus}**gbEnd**`);
                 await page.getByRole('link', { name: `${firstName} ${lastName}` }).first().click();
                 await page.waitForTimeout(2000);
                 await page.getByRole('tab', { name: 'Details' }).click();
