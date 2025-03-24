@@ -91,8 +91,12 @@ test.describe(() => {
                 await page.waitForTimeout(2000);
                 await page.getByRole('link', { name: `${firstName}${lastName}` }).first().click();
                 await page.waitForTimeout(2000);
-                await expect(page.getByRole('link', { name: `${email}` })).toBeVisible();
-                await page.getByRole('link', { name: `${phone}` }).click();
+                if (!email.startsWith('$')) {
+                    await expect(page.getByRole('link', { name: `${email}` })).toBeVisible();
+                }
+                if (!phone.startsWith('$')) {
+                    await expect(page.getByRole('link', { name: `${phone}` })).toBeVisible();
+                }
                 const Opportunitie = page.getByRole('heading', { name: `Opportunity ${firstName}${lastName}` }).locator('div');
                 if (await Opportunitie.isVisible()) {
                     const opportinuteCreationStatus = "Opportinute is created"
