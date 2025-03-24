@@ -22,7 +22,7 @@ test.describe(() => {
             await page.getByRole('textbox', { name: 'Password' }).fill(password);
             await page.waitForTimeout(2000);
             await page.getByRole('button', { name: 'Log In to Sandbox' }).click();
-            await page.waitForTimeout(5000);
+            await page.waitForTimeout(10000);
             await page.getByRole('button', { name: 'App Launcher' }).click();
             await page.waitForTimeout(2000);
             await page.getByRole('option', { name: 'Sales', exact: true }).click();
@@ -47,9 +47,10 @@ test.describe(() => {
                 }
             }
 
-            const status = page.getByText('Qualified').nth(2);
-            if (await status.isVisible()) {
-                console.log('The Lead status is already qualified');
+            const status = page.getByText('Open', { exact: true }).nth(1);
+            if (!(await status.isVisible())) {
+                const leadStatus = 'The Lead status is already qualified Or Contacted '
+                console.log(`**gbStart**leadStatus**splitKeyValue**${leadStatus}**gbEnd**`);
                 return;
             }
 
