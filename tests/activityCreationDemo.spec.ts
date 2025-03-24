@@ -47,7 +47,8 @@ test.describe(() => {
                 }
             }
 
-            const status = page.getByText('Open', { exact: true }).nth(1);
+            const status = page.getByText('Open').nth(1);
+            console.log(await status.isVisible());
             if (await status.isVisible()) {
                 const leadStatus = 'The Lead status is open '
                 console.log(`**gbStart**leadStatus**splitKeyValue**${leadStatus}**gbEnd**`);
