@@ -48,11 +48,7 @@ test.describe(() => {
             }
 
             const status = page.getByText('Open', { exact: true }).nth(1);
-            if (!(await status.isVisible())) {
-                const leadStatus = 'The Lead status is already qualified Or Contacted '
-                console.log(`**gbStart**leadStatus**splitKeyValue**${leadStatus}**gbEnd**`);
-            }
-            else {
+            if (await status.isVisible()) {
                 const leadStatus = 'The Lead status is open '
                 console.log(`**gbStart**leadStatus**splitKeyValue**${leadStatus}**gbEnd**`);
                 await page.getByRole('link', { name: `${firstName} ${lastName}` }).first().click();
@@ -100,6 +96,10 @@ test.describe(() => {
                     const opportinuteCreationStatus = "Opportinute is created"
                     console.log(`**gbStart**opportinuteCreationStatus**splitKeyValue**${opportinuteCreationStatus}**gbEnd**`);
                 }
+            }
+            else {
+                const leadStatus = 'The Lead status is already qualified Or Contacted '
+                console.log(`**gbStart**leadStatus**splitKeyValue**${leadStatus}**gbEnd**`);
             }
         } catch (error) {
             console.error('Test failed:', error);
