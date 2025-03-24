@@ -82,13 +82,14 @@ test.describe(() => {
                     const activityCreationStatus = "activity is created"
                     console.log(`**gbStart**activityCreationStatus**splitKeyValue**${activityCreationStatus}**gbEnd**`);
                 }
+                await page.pause();
                 await page.locator('div').filter({ hasText: /^QualifiedQualified$/ }).locator('a').click();
                 await page.waitForTimeout(2000);
                 await page.getByRole('heading', { name: 'Task Qualified' }).locator('span').click();
                 await page.waitForTimeout(2000);
                 await page.getByRole('link', { name: 'Opportunities' }).click();
                 await page.waitForTimeout(2000);
-                await page.getByRole('rowheader', { name: `${firstName}${lastName} Edit` }).getByRole('link').click();
+                await page.getByRole('link', { name: `${firstName}${lastName}` }).first().click();
                 await page.waitForTimeout(2000);
                 await expect(page.getByRole('link', { name: `${email}` })).toBeVisible();
                 await page.getByRole('link', { name: `${phone}` }).click();
