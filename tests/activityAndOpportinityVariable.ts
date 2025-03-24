@@ -5,5 +5,4 @@ export const firstName = '$firstname';
 export const lastName = '$lastname';
 export const email = '$email';
 export const phone = '$phone';
-export const products = $products;
-export const Quantitys = $quantitys;
+
