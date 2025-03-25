@@ -82,7 +82,6 @@ test.describe(() => {
                     const activityCreationStatus = "activity is created"
                     console.log(`**gbStart**activityCreationStatus**splitKeyValue**${activityCreationStatus}**gbEnd**`);
                 }
-                await page.pause();
                 await page.locator('div').filter({ hasText: /^QualifiedQualified$/ }).locator('a').click();
                 await page.waitForTimeout(2000);
                 await page.getByRole('heading', { name: 'Task Qualified' }).locator('span').click();
