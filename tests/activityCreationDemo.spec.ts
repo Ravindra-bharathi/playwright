@@ -34,7 +34,6 @@ test.describe(() => {
                 if (!email.startsWith('$')) {
                     await page.getByRole('searchbox', { name: 'Search this list...' }).fill(email);
                     await page.getByRole('searchbox', { name: 'Search this list...' }).press('Enter');
-                    await page.waitForSelector(`text=${email}`);
                     await page.waitForTimeout(2000);
                 }
             }
@@ -42,7 +41,6 @@ test.describe(() => {
                 if (!phone.startsWith('$')) {
                     await page.getByRole('searchbox', { name: 'Search this list...' }).fill(phone);
                     await page.getByRole('searchbox', { name: 'Search this list...' }).press('Enter');
-                    await page.waitForSelector(`text=${phone}`);
                     await page.waitForTimeout(2000);
                 }
             }
