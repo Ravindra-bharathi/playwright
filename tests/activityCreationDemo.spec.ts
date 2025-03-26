@@ -79,7 +79,7 @@ test.describe(() => {
                 await page.waitForTimeout(5000);
                 const activity = page.getByText('You have an upcoming task', { exact: true }).first();
                 if (await activity.isVisible()) {
-                    const activityCreationStatus = "activity is created"
+                    const activityCreationStatus = "An activity has been created for the both contacted and qualified"
                     console.log(`**gbStart**activityCreationStatus**splitKeyValue**${activityCreationStatus}**gbEnd**`);
                 }
                 await page.locator('div').filter({ hasText: /^QualifiedQualified$/ }).locator('a').click();
@@ -121,7 +121,7 @@ test.describe(() => {
                 }
                 const Opportunitie = page.getByRole('heading', { name: `Opportunity ${firstName}${lastName}` }).locator('div');
                 if (await Opportunitie.isVisible()) {
-                    const opportinuteCreationStatus = "Opportinute is created"
+                    const opportinuteCreationStatus = `Opportunity successfully created for ${firstName} ${lastName}`
                     console.log(`**gbStart**opportinuteCreationStatus**splitKeyValue**${opportinuteCreationStatus}**gbEnd**`);
                 }
             }
