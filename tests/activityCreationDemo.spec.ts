@@ -88,6 +88,29 @@ test.describe(() => {
                 await page.waitForTimeout(2000);
                 await page.getByRole('link', { name: 'Opportunities' }).click();
                 await page.waitForTimeout(2000);
+                await page.reload();
+                await page.waitForTimeout(5000);
+                await page.getByRole('button', { name: 'Select a List View:' }).click();
+                await page.waitForTimeout(1000);
+                await page.getByRole('option', { name: 'All Opportunities' }).locator('span').nth(1).click();
+                await page.waitForTimeout(2000);
+                if (email) {
+                    if (!email.startsWith('$')) {
+                        await page.getByRole('searchbox', { name: 'Search this list...' }).fill(email);
+                        await page.getByRole('searchbox', { name: 'Search this list...' }).press('Enter');
+                        await page.waitForSelector(`text=${email}`);
+                        await page.waitForTimeout(2000);
+                    }
+                }
+                if (phone) {
+                    if (!phone.startsWith('$')) {
+                        await page.getByRole('searchbox', { name: 'Search this list...' }).fill(phone);
+                        await page.getByRole('searchbox', { name: 'Search this list...' }).press('Enter');
+                        await page.waitForSelector(`text=${phone}`);
+                        await page.waitForTimeout(2000);
+                    }
+                }
+
                 await page.getByRole('link', { name: `${firstName}${lastName}` }).first().click();
                 await page.waitForTimeout(2000);
                 if (!email.startsWith('$')) {
