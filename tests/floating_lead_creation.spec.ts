@@ -8,7 +8,7 @@ test.describe(() => {
         page = await browser.newPage();
     });
 
-    test("Navigate to salesforce ", async ({ browser }) => {
+    test("Navigate to floating salesforce", async ({ browser }) => {
         test.setTimeout(800000);
         let page: Page;
         page = await browser.newPage();
