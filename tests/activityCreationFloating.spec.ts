@@ -121,12 +121,12 @@ test.describe(() => {
 
                 await page.getByRole('link', { name: `${firstName}${lastName}` }).first().click();
                 await page.waitForTimeout(2000);
-                // if (!email.startsWith('$')) {
-                //     await expect(page.getByRole('link', { name: `${email}` })).toBeVisible();
-                // }
-                // if (!phone.startsWith('$')) {
-                //     await expect(page.getByRole('link', { name: `${phone}` })).toBeVisible();
-                // }
+                if (!email.startsWith('$')) {
+                    await expect(page.getByRole('link', { name: `${email}` })).toBeVisible();
+                }
+                if (!phone.startsWith('$')) {
+                    await expect(page.getByRole('link', { name: `${phone}` })).toBeVisible();
+                }
                 const Opportunitie = page.getByRole('heading', { name: `Opportunity ${firstName}${lastName}` }).locator('div');
                 if (await Opportunitie.isVisible()) {
                     const opportinuteCreationStatus = `Opportunity successfully created for ${firstName} ${lastName}`
