@@ -29,6 +29,14 @@ test.describe(() => {
             await page.waitForTimeout(2000);
             await page.getByRole('link', { name: 'Leads' }).click();
             await page.waitForTimeout(2000);
+            await page.reload();
+            await page.waitForTimeout(2000);
+            await page.getByRole('button', { name: 'Select a List View:' }).click();
+            await page.waitForTimeout(1000);
+            await page.getByRole('option', { name: 'All Open Leads' }).locator('span').nth(1).click();
+            await page.waitForTimeout(2000);
+            await page.reload();
+            await page.waitForTimeout(5000);
 
             if (email) {
                 if (!email.startsWith('$')) {
