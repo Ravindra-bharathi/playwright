@@ -23,7 +23,7 @@ test.describe(() => {
         await page.waitForTimeout(5000);
         await page.getByRole('option', { name: 'Sales', exact: true }).click();
         await page.waitForTimeout(2000);
-        await page.getByRole('link', { name: 'Leads' }).click();
+        await page.getByRole('link', { name: 'Leads', exact: true }).click();
         await page.getByRole('button', { name: 'New' }).click();
         await page.waitForTimeout(5000);
         await page.getByRole('combobox', { name: 'Salutation' }).click();

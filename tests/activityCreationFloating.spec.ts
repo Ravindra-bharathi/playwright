@@ -24,7 +24,7 @@ test.describe(() => {
             await page.waitForTimeout(2000);
             await page.getByRole('option', { name: 'Sales', exact: true }).click();
             await page.waitForTimeout(2000);
-            await page.getByRole('link', { name: 'Leads' }).click();
+            await page.getByRole('link', { name: 'Leads', exact: true }).click();
             await page.waitForTimeout(2000);
             await page.reload();
             await page.waitForTimeout(2000);
