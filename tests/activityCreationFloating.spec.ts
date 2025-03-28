@@ -113,11 +113,11 @@ test.describe(() => {
                         await page.waitForTimeout(2000);
                     }
                 }
-                if (firstName) {
-                    await page.getByRole('searchbox', { name: 'Search this list...' }).fill(firstName);
-                    await page.getByRole('searchbox', { name: 'Search this list...' }).press('Enter');
-                    await page.waitForTimeout(2000);
-                }
+                // if (firstName) {
+                //     await page.getByRole('searchbox', { name: 'Search this list...' }).fill(firstName);
+                //     await page.getByRole('searchbox', { name: 'Search this list...' }).press('Enter');
+                //     await page.waitForTimeout(2000);
+                // }
 
                 await page.getByRole('link', { name: `${firstName}${lastName}` }).first().click();
                 await page.waitForTimeout(2000);
