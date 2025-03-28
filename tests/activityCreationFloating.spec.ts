@@ -131,6 +131,7 @@ test.describe(() => {
                 if (await Opportunitie.isVisible()) {
                     const opportinuteCreationStatus = `Opportunity successfully created for ${firstName} ${lastName}`
                     console.log(`**gbStart**opportinuteCreationStatus**splitKeyValue**${opportinuteCreationStatus}**gbEnd**`);
+                    console.log(`**gbStart**opportinuteCreatedUrl**splitKeyValue**${page.url()}**gbEnd**`);
                 }
             }
             else {
