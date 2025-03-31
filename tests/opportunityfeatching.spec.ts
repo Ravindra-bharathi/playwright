@@ -8,7 +8,7 @@ test.describe(() => {
         page = await browser.newPage();
     });
 
-    test("Navigate_to_Lead_floating", async () => {
+    test("Navigate_to_Lead_floating_opportunity", async () => {
         test.setTimeout(800000);
         await page.goto(url);
         try {

@@ -9,7 +9,7 @@ test.describe(() => {
         page = await browser.newPage();
     });
 
-    test("Navigate_to_floating_salesforce", async () => {
+    test("Navigate_to_floating_salesforce_lead", async () => {
         test.setTimeout(800000);
         await page.goto(url);
         try {
