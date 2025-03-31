@@ -1,5 +1,5 @@
 import { test, Page, expect } from '@playwright/test';
-import { email, firstName, lastName, password, phone, Products, quantity, stage, url, username } from './activityFloating';
+import { email, firstName, lastName, password, phone, products, quantity, stage, url, username } from './productsVariables';
 
 test.describe(() => {
     test.setTimeout(800000);
@@ -50,7 +50,7 @@ test.describe(() => {
             await page.waitForTimeout(2000);
             await page.getByRole('combobox', { name: 'Search <Entity> Search <' }).click();
             await page.waitForTimeout(2000);
-            await page.getByRole('combobox', { name: 'Search <Entity> Search <' }).fill(Products);
+            await page.getByRole('combobox', { name: 'Search <Entity> Search <' }).fill(products);
             await page.waitForTimeout(2000);
             await page.getByRole('combobox', { name: 'Search <Entity> Search <' }).press('ArrowDown');
             await page.waitForTimeout(2000);

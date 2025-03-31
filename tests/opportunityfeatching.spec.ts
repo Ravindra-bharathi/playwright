@@ -1,5 +1,5 @@
 import { test, Page, expect } from '@playwright/test';
-import { email, firstName, lastName, password, phone, Products, quantity, stage, url, username } from './activityFloating';
+import { email, firstName, lastName, password, phone, Products, quantity, stage, url, username } from './productsVariables';
 
 test.describe(() => {
     test.setTimeout(800000);
