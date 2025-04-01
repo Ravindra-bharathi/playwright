@@ -85,7 +85,7 @@ test.describe(() => {
                 leadsArray.push(leads);
             }
 
-            console.log(`**gbStart**leadsandstatus**splitKeyValue**${JSON.stringify(leadsArray)}**gbEnd**`);
+            console.log(`**gbStart**leadsandstatus**splitKeyValue**[${leadsArray.join(", ")}]**gbEnd**`);
 
         } catch (error) {
             console.log(error);

@@ -82,7 +82,6 @@ test.describe(() => {
             //     console.log(`**gbStart**opportunityStatus**splitKeyValue**${leads}**gbEnd**`);
             // }
 
-
             const leadsArray: string[] = [];
 
             for (const row of tableData.slice(1)) {
@@ -93,7 +92,7 @@ test.describe(() => {
                 leadsArray.push(leads);
             }
 
-            console.log(`**gbStart**opportunityStatus**splitKeyValue**${JSON.stringify(leadsArray)}**gbEnd**`);
+            console.log(`**gbStart**opportunityStatus**splitKeyValue**[${leadsArray.join(", ")}]**gbEnd**`);
 
         }
         catch (error) {
