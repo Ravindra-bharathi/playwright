@@ -74,13 +74,26 @@ test.describe(() => {
                 }
             }
 
+            // for (const row of tableData.slice(1)) {
+            //     const leadName = row[1];
+            //     const leadStatus = row[3];
+
+            //     const leads = `Opportunity Name: ${leadName}, email id: ${leadStatus}`;
+            //     console.log(`**gbStart**opportunityStatus**splitKeyValue**${leads}**gbEnd**`);
+            // }
+
+
+            const leadsArray: string[] = [];
+
             for (const row of tableData.slice(1)) {
                 const leadName = row[1];
                 const leadStatus = row[3];
 
-                const leads = `Opportunity Name: ${leadName}, email id: ${leadStatus}`;
-                console.log(`**gbStart**opportunityStatus**splitKeyValue**${leads}**gbEnd**`);
+                let leads = `Opportunity Name: ${leadName}, email id: ${leadStatus}`;
+                leadsArray.push(leads);
             }
+
+            console.log(`**gbStart**opportunityStatus**splitKeyValue**${JSON.stringify(leadsArray)}**gbEnd**`);
 
         }
         catch (error) {

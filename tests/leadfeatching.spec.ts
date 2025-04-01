@@ -75,14 +75,17 @@ test.describe(() => {
                     tableData.push(filteredRowData);
                 }
             }
+            const leadsArray: string[] = [];
 
             for (const row of tableData.slice(1)) {
                 const leadName = row[1];
                 const leadStatus = row[5];
 
-                const leads = `Lead Name: ${leadName}, Lead Status: ${leadStatus}`;
-                console.log(`**gbStart**leadsandstatus**splitKeyValue**${leads}**gbEnd**`);
+                let leads = `Lead Name: ${leadName}, Lead Status: ${leadStatus}`;
+                leadsArray.push(leads);
             }
+
+            console.log(`**gbStart**leadsandstatus**splitKeyValue**${JSON.stringify(leadsArray)}**gbEnd**`);
 
         } catch (error) {
             console.log(error);
