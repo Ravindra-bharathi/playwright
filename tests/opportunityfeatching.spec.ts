@@ -79,7 +79,7 @@ test.describe(() => {
                 const leadStatus = row[3];
 
                 const leads = `Opportunity Name: ${leadName}, email id: ${leadStatus}`;
-                console.log(`**gbStart**leadsandstatus**splitKeyValue**${leads}**gbEnd**`);
+                console.log(`**gbStart**opportunityStatus**splitKeyValue**${leads}**gbEnd**`);
             }
 
         }
