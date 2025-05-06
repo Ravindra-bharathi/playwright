@@ -1,5 +1,5 @@
 import { test, Page, selectors, expect } from '@playwright/test';
-import { company, email, firstName, lastName, obj, obj1, password, phone, product, salutation, url, username } from './floating_variable';
+import { company, email, firstName, lastName, password, phone, product, salutation, url, username } from './floating_variable';
 
 test.describe(() => {
     test.setTimeout(800000);
@@ -29,33 +29,33 @@ test.describe(() => {
         await page.getByRole('combobox', { name: 'Salutation' }).click();
         await page.getByText(salutation).click();
         await page.getByRole('textbox', { name: 'First Name' }).click();
-        if (firstName.startsWith('$')) {
-            await page.getByRole('textbox', { name: 'First Name' }).fill(obj.firstName);
-        } else {
-            await page.getByRole('textbox', { name: 'First Name' }).fill(firstName);
-        }
+        // if (firstName.startsWith('$')) {
+        //     await page.getByRole('textbox', { name: 'First Name' }).fill(obj.firstName);
+        // } else {
+        await page.getByRole('textbox', { name: 'First Name' }).fill(firstName);
+        // }
         await page.getByRole('textbox', { name: '*Last Name' }).click();
         await page.waitForTimeout(2000);
-        if (lastName.startsWith('$')) {
-            await page.getByRole('textbox', { name: '*Last Name' }).fill(obj.lastName);
-        } else {
-            await page.getByRole('textbox', { name: '*Last Name' }).fill(lastName);
-        }
+        // if (lastName.startsWith('$')) {
+        //     await page.getByRole('textbox', { name: '*Last Name' }).fill(obj.lastName);
+        // } else {
+        await page.getByRole('textbox', { name: '*Last Name' }).fill(lastName);
+        // }
 
         await page.getByRole('textbox', { name: '*Company' }).click();
         await page.waitForTimeout(2000);
-        if (company.startsWith('$')) {
-            await page.getByRole('textbox', { name: '*Company' }).fill(obj.company);
-        } else {
-            await page.getByRole('textbox', { name: '*Company' }).fill(company);
-        }
+        // if (company.startsWith('$')) {
+        //     await page.getByRole('textbox', { name: '*Company' }).fill(obj.company);
+        // } else {
+        await page.getByRole('textbox', { name: '*Company' }).fill(company);
+        // }
         await page.waitForTimeout(2000);
         await page.getByRole('textbox', { name: 'Phone' }).click();
-        if (phone.startsWith('$')) {
-            await page.getByRole('textbox', { name: 'Phone' }).fill(obj1.phone);
-        } else {
-            await page.getByRole('textbox', { name: 'Phone' }).fill(phone);
-        }
+        // if (phone.startsWith('$')) {
+        //     await page.getByRole('textbox', { name: 'Phone' }).fill(obj1.phone);
+        // } else {
+        await page.getByRole('textbox', { name: 'Phone' }).fill(phone);
+        // }
         await page.waitForTimeout(2000);
         await page.getByRole('textbox', { name: 'Email' }).click();
         await page.getByRole('textbox', { name: 'Email' }).fill(email);

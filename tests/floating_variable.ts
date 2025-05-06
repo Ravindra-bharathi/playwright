@@ -8,8 +8,8 @@ export const phone = '$phone';
 export const salutation = '$salutation';
 export const company = '$company';
 export const product = '$product';
-const temp = $TextfeildData
-const temp1 = $mobileNumber
-export const obj = JSON.parse(JSON.stringify(temp));
-export const obj1 = JSON.parse(JSON.stringify(temp1));
+// const temp = $TextfeildData
+// const temp1 = $mobileNumber
+// export const obj = JSON.parse(JSON.stringify(temp));
+// export const obj1 = JSON.parse(JSON.stringify(temp1));
 
