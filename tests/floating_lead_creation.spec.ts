@@ -5,8 +5,10 @@ test.describe(() => {
     test.setTimeout(800000);
     let page: Page;
     test.beforeAll(async () => {
-        const browser = await chromium.launch(); // force headless
-        page = await browser.newPage();
+        const browser = await chromium.launch({ headless: false });
+        const context = await browser.newContext();
+        await context.grantPermissions(['geolocation'], { origin: url });
+        page = await context.newPage();
     });
 
     test("Navigate_to_floating_salesforce", async () => {
