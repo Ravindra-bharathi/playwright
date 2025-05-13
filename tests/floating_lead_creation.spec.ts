@@ -1,10 +1,11 @@
-import { test, Page, selectors, expect } from '@playwright/test';
+import { test, Page, selectors, expect, chromium } from '@playwright/test';
 import { company, email, firstName, lastName, password, phone, product, salutation, url, username } from './floating_variable';
 
 test.describe(() => {
     test.setTimeout(800000);
     let page: Page;
-    test.beforeAll(async ({ browser }) => {
+    test.beforeAll(async () => {
+        const browser = await chromium.launch({ headless: true }); // force headless
         page = await browser.newPage();
     });
 
