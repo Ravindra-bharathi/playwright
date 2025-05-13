@@ -5,7 +5,7 @@ test.describe(() => {
     test.setTimeout(800000);
     let page: Page;
     test.beforeAll(async () => {
-        const browser = await chromium.launch({ headless: true }); // force headless
+        const browser = await chromium.launch(); // force headless
         page = await browser.newPage();
     });
 
