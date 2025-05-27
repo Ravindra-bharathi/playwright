@@ -1,5 +1,5 @@
 import { test, Page, expect } from '@playwright/test';
-import { email, firstName, lastName, password, phone, products, quantity, stage, url, username } from './productsVariables';
+import { email, password, phone, url, username } from './productsVariables';
 
 test.describe(() => {
     test.setTimeout(800000);
@@ -73,14 +73,6 @@ test.describe(() => {
                     tableData.push(filteredRowData);
                 }
             }
-
-            // for (const row of tableData.slice(1)) {
-            //     const leadName = row[1];
-            //     const leadStatus = row[3];
-
-            //     const leads = `Opportunity Name: ${leadName}, email id: ${leadStatus}`;
-            //     console.log(`**gbStart**opportunityStatus**splitKeyValue**${leads}**gbEnd**`);
-            // }
 
             const leadsArray: string[] = [];
 

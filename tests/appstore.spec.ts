@@ -25,7 +25,7 @@ test.beforeAll(async ({ browserName }) => {
   }
 });
 
-test("test for app store page", async ({ }) => {
+test("test for app store page", async () => {
   if (browserType === "webkit") {
     await page.getByText("Email, phone, or Skype").click();
     await page.getByLabel("Enter your email, phone, or").fill(username);
